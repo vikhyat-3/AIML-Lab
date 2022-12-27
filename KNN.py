@@ -13,11 +13,9 @@ iris_dataset=load_iris()
 
 #display the iris dataset
 print("\n IRIS FEATURES \ TARGET NAMES: \n ", iris_dataset.target_names)
-print("\n IRIS DATA :\n",iris_dataset["data"])
 
 #split the data into training and testing data
 X_train, X_test, y_train, y_test = train_test_split(iris_dataset["data"], iris_dataset["target"], random_state=0)
-
 print("\n Target :\n",iris_dataset["target"])
 print("\n X TRAIN \n", X_train)
 print("\n X TEST \n", X_test)
@@ -30,8 +28,6 @@ kn.fit(X_train, y_train)
 
 #predicting from model
 for i in range(len(X_test)):
-  x = X_test[i]
-  x_new = np.array([x])
-  prediction = kn.predict(x_new)
-  print("\n Actual : {0} {1}, Predicted :{2}{3}".format(y_test[i],iris_dataset["target_names"][y_test[i]],prediction,iris_dataset["target_names"][ prediction]))
+  prediction = kn.predict([X_test[i]])
+  print("\n Actual : {0} {1}, Predicted :{2}{3}".format(y_test[i],iris_dataset["target_names"][y_test[i]],prediction,iris_dataset["target_names"][prediction]))
 print("\n TEST SCORE[ACCURACY]: {:.2f}\n".format(kn.score(X_test, y_test)))
