@@ -1,6 +1,6 @@
 import math
 import csv
-
+from collections import defaultdict
 def load_csv(filename):
     lines=csv.reader(open(filename,"r"));
     dataset = list(lines)
@@ -15,25 +15,20 @@ class Node:
 
 
 def subtables(data,col,delete):
-    dic={}
+    dic=defaultdict(list)
     coldata=[row[col] for row in data]
     attr=list(set(coldata))
     counts=[0]*len(attr)
-    r=len(data)
-    c=len(data[0])
     for x in range(len(attr)):
-        for y in range(r):
-            if data[y][col]==attr[x]:
+        for y in data:
+            if y[col]==attr[x]:
                 counts[x]+=1
     for x in range(len(attr)):
-        dic[attr[x]]=[[0 for i in range(c)] for j in range(counts[x])]
-        pos=0
-        for y in range(r):
-            if data[y][col]==attr[x]:
+        for y in data:
+            if y[col]==attr[x]:
                 if delete:
-                    del data[y][col]
-                dic[attr[x]][pos]=data[y]
-                pos+=1
+                    del y[col]
+                dic[attr[x]].append(y)
     return attr,dic
 
 def entropy(S):
@@ -98,7 +93,7 @@ def classify(node,x_test,features):
         if x_test[pos]==value:
             classify(n,x_test,features)
 
-dataset,features=load_csv("testtennis.csv")
+dataset,features=load_csv("traintennis.csv")
 node1=build_tree(dataset,features)
 print("The decision tree for the dataset using ID3 algorithm is")
 print_tree(node1,0)
