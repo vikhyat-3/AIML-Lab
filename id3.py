@@ -35,12 +35,12 @@ def entropy(S):
     attr=list(set(S))
     if len(attr)==1:
         return 0
-    counts=[0,0]
-    for i in range(2):
-        counts[i]=sum([1 for x in S if attr[i]==x])/(len(S)*1.0)
+    counts=defaultdict(int)
+    for i in S:
+        counts[i]+=1
     sums=0
-    for cnt in counts:
-        sums+=-1*cnt*math.log(cnt,2)
+    for cnt in counts.values():
+        sums+=-(1*cnt*math.log(cnt/len(S),2)/len(S))
     return sums
 
 def compute_gain(data,col):
