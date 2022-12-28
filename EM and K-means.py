@@ -4,8 +4,6 @@ from sklearn.cluster import KMeans
 import sklearn.metrics as sm
 import pandas as pd
 import numpy as np
-
-
 l1 = [0,1,2]
 def rename(s):
 	l2 = []
@@ -44,17 +42,6 @@ plt.figure(figsize=(14,7))
 
 # Create a colormap
 colormap = np.array(['red', 'lime', 'black'])
-
-# Plot Sepal
-plt.subplot(1,2,1)
-plt.scatter(X.Sepal_Length,X.Sepal_Width, c=colormap[y.Targets], s=40)
-plt.title('Sepal')
-
-plt.subplot(1,2,2)
-plt.scatter(X.Petal_Length,X.Petal_Width, c=colormap[y.Targets], s=40)
-plt.title('Petal')
-plt.show()
-
 print("Actual Target is:\n", iris.target)
 
 # K Means Cluster
