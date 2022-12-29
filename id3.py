@@ -18,11 +18,6 @@ def subtables(data,col,delete):
     dic=defaultdict(list)
     coldata=[row[col] for row in data]
     attr=list(set(coldata))
-    counts=[0]*len(attr)
-    for x in range(len(attr)):
-        for y in data:
-            if y[col]==attr[x]:
-                counts[x]+=1
     for x in range(len(attr)):
         for y in data:
             if y[col]==attr[x]:
