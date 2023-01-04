@@ -18,12 +18,11 @@ def subtables(data,col,delete):
     dic=defaultdict(list)
     coldata=[row[col] for row in data]
     attr=list(set(coldata))
-    for x in range(len(attr)):
-        for y in data:
-            if y[col]==attr[x]:
-                if delete:
-                    del y[col]
-                dic[attr[x]].append(y)
+    for y in data:
+        p=y[col]
+        if delete:
+            del y[col]
+        dic[p].append(y)
     return attr,dic
 
 def entropy(S):
