@@ -24,17 +24,14 @@ def stdev(numbers):
         v += (x-avg)**2
     return math.sqrt(v/(len(numbers)-1))
 
-def summarizeByClass(dataset):
-    separated = {}
-    for i in range(len(dataset)):
-        vector = dataset[i]
-        if (vector[-1] not in separated):
-            separated[vector[-1]] = []
-        separated[vector[-1]].append(vector)
-    summaries = {}
-    for classValue, instances in separated.items():
-        summaries[classValue] = [(mean(attribute), stdev(attribute)) for attribute in zip(*instances)][:-1]
-    return summaries
+def getSummarizedClass(trainingSet):
+  separated=defaultdict(list)
+  for i in trainingSet:
+    separated[i[-1]].append(i)
+  summarize={}
+  for classValue,instance in separated.items():
+    summarize[classValue]=[(getMean(attribute),getStddev(attribute)) for attribute in zip(*instance)][:-1]
+  return summarize
 
 def calculateProbability(x, mean, stdev):
     exponent = math.exp((-(x-mean)*2)/(2(stdev**2)))
